@@ -1,6 +1,6 @@
 package com.jdc.onlineshopping.utils;
 
-import com.jdc.onlineshopping.common.exception.JDCRuntimeException;
+import com.jdc.onlineshopping.aop.exception.JDCRuntimeException;
 import com.jdc.onlineshopping.web.rest.dto.MetadataDTO;
 import com.jdc.onlineshopping.web.rest.dto.ResponseDTO;
 import org.springframework.http.ResponseEntity;
