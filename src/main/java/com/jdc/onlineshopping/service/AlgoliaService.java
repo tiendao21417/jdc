@@ -14,5 +14,11 @@ public interface AlgoliaService {
 
     void pushProduct(ProductDTO brandDTO);
 
+    void pushBrand(BrandDTO[] brandDTOs);
+
+    void pushCategory(CategoryDTO[] brandDTOs);
+
+    void pushProduct(ProductDTO[] brandDTOs);
+
     SearchResult<ProductDTO> find(FindProductDTO findProductDTO, String requestId);
 }

@@ -1,5 +1,7 @@
 package com.jdc.onlineshopping.mapper;
 
+import com.jdc.onlineshopping.web.rest.dto.ProductDTO;
+
 import java.util.List;
 
 /**

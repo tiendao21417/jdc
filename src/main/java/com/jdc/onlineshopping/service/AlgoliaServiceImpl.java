@@ -13,7 +13,9 @@ import com.jdc.onlineshopping.web.rest.dto.CategoryDTO;
 import com.jdc.onlineshopping.web.rest.dto.ProductDTO;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.List;
 
 /**
  * @author tiendao on 22/07/2021
@@ -92,6 +94,39 @@ public class AlgoliaServiceImpl implements AlgoliaService {
         initializeIfNeed();
         productDTO.setObjectID(String.valueOf(productDTO.getId()));
         this.productDTOSearchIndex.saveObjectAsync(productDTO);
+    }
+
+    @Override
+    public void pushBrand(BrandDTO[] dtos) {
+        initializeIfNeed();
+        List<BrandDTO> result = new ArrayList<>();
+        for (BrandDTO dto : dtos) {
+            dto.setObjectID(String.valueOf(dto.getId()));
+            result.add(dto);
+        }
+        this.brandDTOSearchIndex.saveObjectsAsync(result);
+    }
+
+    @Override
+    public void pushCategory(CategoryDTO[] dtos) {
+        initializeIfNeed();
+        List<CategoryDTO> result = new ArrayList<>();
+        for (CategoryDTO dto : dtos) {
+            dto.setObjectID(String.valueOf(dto.getId()));
+            result.add(dto);
+        }
+        this.categoryDTOSearchIndex.saveObjectsAsync(result);
+    }
+
+    @Override
+    public void pushProduct(ProductDTO[] brandDTOs) {
+        initializeIfNeed();
+        List<ProductDTO> result = new ArrayList<>();
+        for (ProductDTO productDTO : brandDTOs) {
+            productDTO.setObjectID(String.valueOf(productDTO.getId()));
+            result.add(productDTO);
+        }
+        this.productDTOSearchIndex.saveObjectsAsync(result);
     }
 
     @Override

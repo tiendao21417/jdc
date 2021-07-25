@@ -20,6 +20,7 @@ import org.springframework.stereotype.Service;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
+import java.util.stream.Collectors;
 
 /**
  * @author tiendao on 18/07/2021
@@ -88,6 +89,16 @@ public class BrandServiceImpl implements BrandService {
                     new Object[]{"body"}, null));
         }
         BrandDTO result = brandMapper.toDto(brandOptional.get());
+        return ResponseUtils.responseOK(result);
+    }
+
+    @Override
+    public ResponseDTO createMultiple(List<BrandDTO> brandDTOS, String requestId) {
+
+        List<Brand> entities = brandMapper.toEntity(brandDTOS);
+        entities = brandRepository.saveAll(entities);
+        List<BrandDTO> result = brandMapper.toDto(entities);
+        kafkaService.send(result, requestId, KafkaTransferKeys.UPDATE_BRANDS);
         return ResponseUtils.responseOK(result);
     }
 }

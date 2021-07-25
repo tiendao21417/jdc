@@ -1,5 +1,6 @@
 package com.jdc.onlineshopping.app.ops.web.rest;
 
+import com.jdc.onlineshopping.app.ops.web.rest.dto.CreateMultipleBrandDTO;
 import com.jdc.onlineshopping.constant.CPagging;
 import com.jdc.onlineshopping.constant.CRequestAttribute;
 import com.jdc.onlineshopping.app.ops.web.rest.dto.CreateBrandDTO;
@@ -9,6 +10,9 @@ import com.jdc.onlineshopping.web.rest.dto.ResponseDTO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * @author tiendao on 18/07/2021
@@ -28,6 +32,22 @@ public class OpsBrandController {
         brandDTO.setCode(createBrandDTO.getCode());
         brandDTO.setName(createBrandDTO.getName());
         ResponseDTO result = brandService.create(brandDTO, requestId);
+        return ResponseEntity.ok().body(result);
+    }
+
+    @PostMapping("multiple")
+    public ResponseEntity<ResponseDTO> createMultiple(@RequestBody CreateMultipleBrandDTO createMultipleBrandDTO,
+                                              @RequestAttribute(name = CRequestAttribute.REQUEST_ID) String requestId) {
+
+        List<BrandDTO> brandDTOS = new ArrayList<>();
+        for (CreateBrandDTO createBrandDTO : createMultipleBrandDTO.getItems()) {
+
+            BrandDTO brandDTO = new BrandDTO();
+            brandDTO.setCode(createBrandDTO.getCode());
+            brandDTO.setName(createBrandDTO.getName());
+            brandDTOS.add(brandDTO);
+        }
+        ResponseDTO result = brandService.createMultiple(brandDTOS, requestId);
         return ResponseEntity.ok().body(result);
     }
 
