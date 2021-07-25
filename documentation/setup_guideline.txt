@@ -1,9 +1,0 @@
-##################################################
-This guideline support setup run JDC on local.
-##################################################
-
-1. setup docker
- - reference guide: https://docs.docker.com/engine/install/ubuntu/
-
-2. install mysql
- docker run --name mysql_jdc -e 'MYSQL_ROOT_PASSWORD=root' -p '3309:3306' -v ~/MountVolumes/mysql_jdc mysql

@@ -1,7 +1,17 @@
-# JDC
-JAVA DEVELOPMENT CHALLENGE
+# JDC-JAVA DEVELOPMENT CHALLENGE
 
-
+### INTRODUCTION
+Problem Statement
+A small start-up named "iCommerce" wants to build a very simple online shopping application to sell
+their products. In order to get to the market quickly, they just want to build an MVP version with a very
+limited set of functionalities:
+1. The application is simply a simple web page that shows all products on which customers can
+   filter and search for products based on different criteria such as product category, name, price,
+   brand, colour.
+2. If the customer finds a product that they like, they can view its details and add it to their
+   shopping cart and proceed to place an order.
+3. No online payment is supported yet. The customer is required to pay by cash when the product
+   got delivered.
 
 ### Setup Environment
 
@@ -115,3 +125,55 @@ mvn test
 ```
 mvn spring-boot:run -Dspring.profiles.active=be
 ```
+
+### APIS
+- We can get full api curl from:
+  https://github.com/tiendao21417/jdc/blob/main/documentation/JDC.postman_collection.json
+  
+   Get it and import this one to postman.
+  
+
+- Base endpoint:
+   ```http://localhost:8080```
+  
+This is detail on below:
+#### MANAGER
+   The manager has a role in product management. To use OPS APIs we need to OPS account for accept role.
+
+   Register new Manage Account
+
+   - POST `{{base_endpoint}}/ops/v1/register`Create Ops account
+
+   - POST `{{base_endpoint}}/ops/v1/login`Login to OPS
+
+   
+1. Brand management APIs.
+   - POST `{{base_endpoint}}/ops/v1/brands`Create new Brand
+   - GET `{{base_endpoint}}/ops/v1/brands` Get brand list
+   - POST `{{base_endpoint}}/ops/v1/brands/{id}`Update exist Brand
+   - GET `{{base_endpoint}}/ops/v1/brands/{id}` Get brand detail
+   
+2. Category management APIs.
+   - POST `{{base_endpoint}}/ops/v1/category`Create new Category
+   - GET `{{base_endpoint}}/ops/v1/category` Get Category list
+   - POST `{{base_endpoint}}/ops/v1/category/{id}`Update exist Category
+   - GET `{{base_endpoint}}/ops/v1/category/{id}` Get Category detail
+   
+3. Product management APIs.
+   - POST `{{base_endpoint}}/ops/v1/product`Create new Product
+   - GET `{{base_endpoint}}/ops/v1/product` Get Product list
+   - POST `{{base_endpoint}}/ops/v1/product/{id}`Update exist Product
+   - GET `{{base_endpoint}}/ops/v1/product/{id}` Get Product detail
+
+
+### CUSTOMER
+   
+   The customer can search, view product detail, add to cart and create order.
+   - GET `{{base_endpoint}}/api/v1/products` Get Product list by filter.
+   - GET `{{base_endpoint}}/api/v1/products/{id}` Get Product detail.
+   - POST `{{base_endpoint}}/api/v1/cart` Add/remove product to cart.
+   - GET `{{base_endpoint}}/api/v1/cart` view cart detail.
+   - POST `{{base_endpoint}}/api/v1/orders` Create new order.
+   - GET `{{base_endpoint}}/api/v1/orders/{id}` view order detail.
+
+
