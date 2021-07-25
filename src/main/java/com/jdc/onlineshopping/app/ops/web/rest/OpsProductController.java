@@ -1,5 +1,6 @@
 package com.jdc.onlineshopping.app.ops.web.rest;
 
+import com.jdc.onlineshopping.app.ops.web.rest.dto.CreateMultipleProductDTO;
 import com.jdc.onlineshopping.constant.CPagging;
 import com.jdc.onlineshopping.constant.CRequestAttribute;
 import com.jdc.onlineshopping.domain.User;
@@ -25,6 +26,14 @@ public class OpsProductController {
                                               @RequestAttribute(name = CRequestAttribute.REQUEST_ID) String requestId) {
 
         ResponseDTO result = productService.create(dto, requestId);
+        return ResponseEntity.ok().body(result);
+    }
+
+    @PostMapping("multiple")
+    public ResponseEntity<ResponseDTO> multiple(@RequestBody CreateMultipleProductDTO createMultipleProductDTO,
+                                              @RequestAttribute(name = CRequestAttribute.REQUEST_ID) String requestId) {
+
+        ResponseDTO result = productService.multiple(createMultipleProductDTO, requestId);
         return ResponseEntity.ok().body(result);
     }
 

@@ -1,12 +1,14 @@
 package com.jdc.onlineshopping.service;
 
 import com.jdc.onlineshopping.constant.CErrors;
+import com.jdc.onlineshopping.domain.Brand;
 import com.jdc.onlineshopping.domain.Category;
 import com.jdc.onlineshopping.kafka.KafkaTransferKeys;
 import com.jdc.onlineshopping.mapper.CategoryMapper;
 import com.jdc.onlineshopping.repository.CategoryRepository;
 import com.jdc.onlineshopping.utils.ResponseUtils;
 import com.jdc.onlineshopping.utils.Throws;
+import com.jdc.onlineshopping.web.rest.dto.BrandDTO;
 import com.jdc.onlineshopping.web.rest.dto.CategoryDTO;
 import com.jdc.onlineshopping.web.rest.dto.ResponseDTO;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -47,6 +49,16 @@ public class CategoryServiceImpl implements CategoryService {
         CategoryDTO categoryDTO = categoryMapper.toDto(category);
         kafkaService.send(categoryDTO, requestId, KafkaTransferKeys.UPDATE_CATEGORY);
         return ResponseUtils.responseOK(categoryDTO);
+    }
+
+    @Override
+    public ResponseDTO createMultiple(List<CategoryDTO> categoryDTOS, String requestId) {
+
+        List<Category> entities = categoryMapper.toEntity(categoryDTOS);
+        entities = categoryRepository.saveAll(entities);
+        List<CategoryDTO> result = categoryMapper.toDto(entities);
+        kafkaService.send(result, requestId, KafkaTransferKeys.UPDATE_CATEGORIES);
+        return ResponseUtils.responseOK(result);
     }
 
     @Override

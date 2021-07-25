@@ -1,0 +1,531 @@
+{
+	"info": {
+		"_postman_id": "5b08a16d-eefd-4d3d-8544-d8f22d293eed",
+		"name": "Demo JDC",
+		"description": "collection for study",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "/ops/v1/brands",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n  \"code\": \"AP\",\n  \"name\": \"Audemars Piguet\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{base_endpoint}}/ops/v1/brands",
+					"host": [
+						"{{base_endpoint}}"
+					],
+					"path": [
+						"ops",
+						"v1",
+						"brands"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "/api/v1/login",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"email\": \"tien.dao21418@gmail.com\",\n    \"password\": \"abcd123456\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{base_endpoint}}/api/v1/login",
+					"host": [
+						"{{base_endpoint}}"
+					],
+					"path": [
+						"api",
+						"v1",
+						"login"
+					]
+				},
+				"description": "login api"
+			},
+			"response": []
+		},
+		{
+			"name": "/api/v1/register",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"email\": \"tien.dao21418@gmail.com\",\n    \"password\": \"abcd123456\",\n    \"name\": \"Tien Dao\",\n    \"full_address\": \"1D Nguyen Hue, District 1, HCM\",\n    \"phone_number\": \"0907958077\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{base_endpoint}}/api/v1/register",
+					"host": [
+						"{{base_endpoint}}"
+					],
+					"path": [
+						"api",
+						"v1",
+						"register"
+					]
+				},
+				"description": "register"
+			},
+			"response": []
+		},
+		{
+			"name": "/ops/v1/register",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"email\": \"tien.dao21417@gmail.com\",\n    \"password\": \"abcd123456\",\n    \"name\": \"Tien Dao\",\n    \"full_address\": \"1D Nguyen Hue, District 1, HCM\",\n    \"phone_number\": \"0907958077\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{base_endpoint}}/ops/v1/register",
+					"host": [
+						"{{base_endpoint}}"
+					],
+					"path": [
+						"ops",
+						"v1",
+						"register"
+					]
+				},
+				"description": "register new manager"
+			},
+			"response": []
+		},
+		{
+			"name": "/ops/v1/login",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"email\": \"tien.dao21417@gmail.com\",\n    \"password\": \"abcd123456\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{base_endpoint}}/ops/v1/login",
+					"host": [
+						"{{base_endpoint}}"
+					],
+					"path": [
+						"ops",
+						"v1",
+						"login"
+					]
+				},
+				"description": "manager login"
+			},
+			"response": []
+		},
+		{
+			"name": "/ops/v1/brands",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "{{logged_token}}",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"code\": \"MK\",\n    \"name\": \"MICHAEL KORS\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{base_endpoint}}/ops/v1/brands",
+					"host": [
+						"{{base_endpoint}}"
+					],
+					"path": [
+						"ops",
+						"v1",
+						"brands"
+					]
+				},
+				"description": "update brand"
+			},
+			"response": []
+		},
+		{
+			"name": "/ops/v1/categories",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "{{logged_token}}",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"code\": \"WT\",\n    \"name\": \"WATCHES\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{base_endpoint}}/ops/v1/categories",
+					"host": [
+						"{{base_endpoint}}"
+					],
+					"path": [
+						"ops",
+						"v1",
+						"categories"
+					]
+				},
+				"description": "create new categories"
+			},
+			"response": []
+		},
+		{
+			"name": "/ops/v1/categories",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "{{logged_token}}",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{base_endpoint}}/ops/v1/categories",
+					"host": [
+						"{{base_endpoint}}"
+					],
+					"path": [
+						"ops",
+						"v1",
+						"categories"
+					]
+				},
+				"description": "get list"
+			},
+			"response": []
+		},
+		{
+			"name": "/ops/v1/brands",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "{{logged_token}}",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{base_endpoint}}/ops/v1/brands",
+					"host": [
+						"{{base_endpoint}}"
+					],
+					"path": [
+						"ops",
+						"v1",
+						"brands"
+					]
+				},
+				"description": "get brands"
+			},
+			"response": []
+		},
+		{
+			"name": "/ops/v1/products",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "{{logged_token}}",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"category_id\": 1,\n    \"brand_id\": 1,\n    \"name\": \"Runway Quartz Mother Of Pearl Dial Ladies Watch\",\n    \"colour\": \"Gold\",\n    \"url\": \"https://www.watchshopping.com/media/catalog/product/cache/7881c480d497f569c4132299ea27b34f/M/i/Michael_Kors-Runway-MK6689.jpg\",\n    \"price\": 1500.00,\n    \"remain_amount\": 100\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{base_endpoint}}/ops/v1/products",
+					"host": [
+						"{{base_endpoint}}"
+					],
+					"path": [
+						"ops",
+						"v1",
+						"products"
+					]
+				},
+				"description": "create product"
+			},
+			"response": []
+		},
+		{
+			"name": "/api/v1/products",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "{{api_logged_token}}",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{base_endpoint}}/api/v1/products?categories=1,2&brands=1,2&colour=GOLD, YELLOW&price_min=0&price_max=2000&name=Steel Watch",
+					"host": [
+						"{{base_endpoint}}"
+					],
+					"path": [
+						"api",
+						"v1",
+						"products"
+					],
+					"query": [
+						{
+							"key": "categories",
+							"value": "1,2",
+							"description": "on UI checkbox category"
+						},
+						{
+							"key": "brands",
+							"value": "1,2",
+							"description": "on UI checkbox brand"
+						},
+						{
+							"key": "colour",
+							"value": "GOLD, YELLOW",
+							"description": "on UI select color/ type color"
+						},
+						{
+							"key": "price_min",
+							"value": "0",
+							"description": "default is zero"
+						},
+						{
+							"key": "price_max",
+							"value": "2000",
+							"description": "if not input. price is unlimit"
+						},
+						{
+							"key": "name",
+							"value": "Steel Watch",
+							"description": "product name"
+						}
+					]
+				},
+				"description": "filter product"
+			},
+			"response": []
+		},
+		{
+			"name": "/api/v1/cart",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "{{api_logged_token}}",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"productId\": 3,\n    \"amount\": 4\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{base_endpoint}}/api/v1/cart",
+					"host": [
+						"{{base_endpoint}}"
+					],
+					"path": [
+						"api",
+						"v1",
+						"cart"
+					]
+				},
+				"description": "add/remove item to cart"
+			},
+			"response": []
+		},
+		{
+			"name": "/api/v1/cart",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "{{api_logged_token}}",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{base_endpoint}}/api/v1/cart",
+					"host": [
+						"{{base_endpoint}}"
+					],
+					"path": [
+						"api",
+						"v1",
+						"cart"
+					]
+				},
+				"description": "cart detail"
+			},
+			"response": []
+		},
+		{
+			"name": "/ops/v1/products",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "{{logged_token}}",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{base_endpoint}}/ops/v1/products",
+					"host": [
+						"{{base_endpoint}}"
+					],
+					"path": [
+						"ops",
+						"v1",
+						"products"
+					]
+				},
+				"description": "get product list"
+			},
+			"response": []
+		},
+		{
+			"name": "/api/v1/order",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "{{api_logged_token}}",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"customer_name\": \"DAO VAN TIEN\",\n    \"customer_phone\": \"0907958077\",\n    \"customer_address\": \"Phuoc Long B, District 9, HCM\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{base_endpoint}}/api/v1/order",
+					"host": [
+						"{{base_endpoint}}"
+					],
+					"path": [
+						"api",
+						"v1",
+						"order"
+					]
+				},
+				"description": "create order"
+			},
+			"response": []
+		}
+	]
+}

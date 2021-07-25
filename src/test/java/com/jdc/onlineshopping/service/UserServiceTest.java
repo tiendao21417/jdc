@@ -24,7 +24,7 @@ public class UserServiceTest {
     @Test
     void saveUser() {
 
-        Mock.
+        // Mock.
         UserDTO userDTO = new UserDTO();
         User user = userService.save(userDTO);
 

@@ -44,6 +44,36 @@ public class KafkaConsumerServiceImpl implements KafkaConsumerService {
         if (KafkaTransferKeys.UPDATE_PRODUCT.equals(header.getKey())) {
             handleUpdateProduct(JsonSupport.toObject(transferData.getData(), ProductDTO.class), header.getRequestId());
         }
+
+        if (KafkaTransferKeys.UPDATE_BRANDS.equals(header.getKey())) {
+            handleUpdateBrands(JsonSupport.toObject(transferData.getData(), BrandDTO[].class), header.getRequestId());
+        }
+
+        if (KafkaTransferKeys.UPDATE_CATEGORIES.equals(header.getKey())) {
+            handleUpdateCategories(JsonSupport.toObject(transferData.getData(), CategoryDTO[].class), header.getRequestId());
+            return;
+        }
+
+        if (KafkaTransferKeys.UPDATE_PRODUCTS.equals(header.getKey())) {
+            handleUpdateProducts(JsonSupport.toObject(transferData.getData(), ProductDTO[].class), header.getRequestId());
+        }
+    }
+
+    private void handleUpdateProducts(ProductDTO[] productDTOs, String requestId) {
+
+        LoggerProvider.APP.info("Start send products to algolia: " + JsonSupport.toJson(productDTOs));
+        algoliaService.pushProduct(productDTOs);
+    }
+
+    private void handleUpdateCategories(CategoryDTO[] categoryDTOs, String requestId) {
+        LoggerProvider.APP.info("Start send categories to algolia: " + JsonSupport.toJson(categoryDTOs));
+        algoliaService.pushCategory(categoryDTOs);
+    }
+
+    private void handleUpdateBrands(BrandDTO[] brandDTOs, String requestId) {
+
+        LoggerProvider.APP.info("Start send brands to algolia: " + JsonSupport.toJson(brandDTOs));
+        algoliaService.pushBrand(brandDTOs);
     }
 
     private void handleUpdateProduct(ProductDTO productDTO, String requestId) {
@@ -59,9 +89,8 @@ public class KafkaConsumerServiceImpl implements KafkaConsumerService {
     }
 
     private void handleUpdateBrand(BrandDTO brandDTO, String requestId) {
-        LoggerProvider.APP.info("Start send brand to algolia: " + JsonSupport.toJson(brandDTO));
 
+        LoggerProvider.APP.info("Start send brand to algolia: " + JsonSupport.toJson(brandDTO));
         algoliaService.pushBrand(brandDTO);
-        LoggerProvider.APP.info("Done push brand to Algolia");
     }
 }

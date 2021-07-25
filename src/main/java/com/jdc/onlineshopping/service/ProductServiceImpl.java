@@ -1,6 +1,7 @@
 package com.jdc.onlineshopping.service;
 
 import com.jdc.onlineshopping.aop.logging.LoggerProvider;
+import com.jdc.onlineshopping.app.ops.web.rest.dto.CreateMultipleProductDTO;
 import com.jdc.onlineshopping.constant.CErrors;
 import com.jdc.onlineshopping.domain.Brand;
 import com.jdc.onlineshopping.domain.Category;
@@ -123,5 +124,39 @@ public class ProductServiceImpl implements ProductService {
         Product product = productOptional.get();
         ProductDTO productDTO = productMapper.toDto(product);
         return ResponseUtils.responseOK(productDTO);
+    }
+
+    @Override
+    public ResponseDTO multiple(CreateMultipleProductDTO createMultipleProductDTO, String requestId) {
+
+        List<Product> products = new ArrayList<>();
+        for (CreateProductDTO dto : createMultipleProductDTO.getItems()) {
+
+            Product product = new Product();
+            product.setName(dto.getName());
+            product.setPrice(dto.getPrice());
+            product.setColour(dto.getColour());
+            product.setUrl(dto.getUrl());
+            product.setRemainAmount(dto.getRemainAmount());
+            Optional<Category> categoryOptional = categoryRepository.findById(dto.getCategoryId());
+            if (categoryOptional.isEmpty()) {
+                Throws.of(CErrors.BAD_REQUEST_BY_WRONG_PARAMETER, messageSource.getMessage(CErrors.BAD_REQUEST_BY_WRONG_PARAMETER,
+                        new Object[]{"body"}, null));
+            }
+            product.setCategory(categoryOptional.get());
+            Optional<Brand> brandOptional = brandRepository.findById(dto.getBrandId());
+            if (brandOptional.isEmpty()) {
+                Throws.of(CErrors.BAD_REQUEST_BY_WRONG_PARAMETER, messageSource.getMessage(CErrors.BAD_REQUEST_BY_WRONG_PARAMETER,
+                        new Object[]{"body"}, null));
+            }
+            product.setBrand(brandOptional.get());
+            products.add(product);
+        }
+
+        // LoggerProvider.APP.info(String.format("store product [%s]", JsonSupport.toJson(product)));
+        products = productRepository.saveAll(products);
+        List<ProductDTO> productDTOS = productMapper.toDto(products);
+        kafkaService.send(productDTOS, requestId, KafkaTransferKeys.UPDATE_PRODUCTS);
+        return ResponseUtils.responseOK(productDTOS);
     }
 }
