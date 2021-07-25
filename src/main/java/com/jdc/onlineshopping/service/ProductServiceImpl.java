@@ -1,16 +1,17 @@
 package com.jdc.onlineshopping.service;
 
+import com.jdc.onlineshopping.aop.logging.LoggerProvider;
 import com.jdc.onlineshopping.constant.CErrors;
 import com.jdc.onlineshopping.domain.Brand;
 import com.jdc.onlineshopping.domain.Category;
 import com.jdc.onlineshopping.domain.Product;
 import com.jdc.onlineshopping.kafka.KafkaTransferKeys;
 import com.jdc.onlineshopping.mapper.ProductMapper;
-import com.jdc.onlineshopping.app.ops.service.OpsKafkaService;
 import com.jdc.onlineshopping.app.ops.web.rest.dto.CreateProductDTO;
 import com.jdc.onlineshopping.repository.BrandRepository;
 import com.jdc.onlineshopping.repository.CategoryRepository;
 import com.jdc.onlineshopping.repository.ProductRepository;
+import com.jdc.onlineshopping.utils.JsonSupport;
 import com.jdc.onlineshopping.utils.ResponseUtils;
 import com.jdc.onlineshopping.utils.Throws;
 import com.jdc.onlineshopping.web.rest.dto.ProductDTO;
@@ -46,7 +47,7 @@ public class ProductServiceImpl implements ProductService {
     private BrandRepository brandRepository;
 
     @Autowired
-    private OpsKafkaService kafkaService;
+    private KafkaService kafkaService;
 
     @Autowired
     private MessageSource messageSource;
@@ -79,6 +80,7 @@ public class ProductServiceImpl implements ProductService {
         product.setPrice(dto.getPrice());
         product.setColour(dto.getColour());
         product.setUrl(dto.getUrl());
+        product.setRemainAmount(dto.getRemainAmount());
         Optional<Category> categoryOptional = categoryRepository.findById(dto.getCategoryId());
         if (categoryOptional.isEmpty()) {
             Throws.of(CErrors.BAD_REQUEST_BY_WRONG_PARAMETER, messageSource.getMessage(CErrors.BAD_REQUEST_BY_WRONG_PARAMETER,
@@ -92,6 +94,7 @@ public class ProductServiceImpl implements ProductService {
         }
         product.setBrand(brandOptional.get());
 
+        LoggerProvider.APP.info(String.format("store product [%s]", JsonSupport.toJson(product)));
         product = productRepository.save(product);
         ProductDTO productDTO = productMapper.toDto(product);
         kafkaService.send(productDTO, requestId, KafkaTransferKeys.UPDATE_PRODUCT);
@@ -101,6 +104,7 @@ public class ProductServiceImpl implements ProductService {
     @Override
     public ResponseDTO getList(String requestId, int page, int limit) {
 
+        LoggerProvider.APP.info("page: " + page + ":" + limit);
         Pageable paging = PageRequest.of(page, limit, Sort.by("id").descending());
         Page<Product> result = productRepository.findAll(paging);
         List<Product> categories = new ArrayList<>(result.getContent());

@@ -1,6 +1,7 @@
 package com.jdc.onlineshopping.aop.exception.handler;
 
 import com.jdc.onlineshopping.aop.exception.JDCAuthenticationException;
+import com.jdc.onlineshopping.aop.exception.JDCRequestException;
 import com.jdc.onlineshopping.aop.logging.LoggerProvider;
 import com.jdc.onlineshopping.aop.logging.dto.ErrorDTO;
 import com.jdc.onlineshopping.constant.CRequestAttribute;
@@ -28,7 +29,6 @@ import java.security.SignatureException;
 @EnableWebMvc
 @ControllerAdvice
 public class ExceptionHandlerAdvice {
-
 
 
     @ExceptionHandler(SignatureException.class)
@@ -62,10 +62,18 @@ public class ExceptionHandlerAdvice {
     @ResponseStatus(HttpStatus.UNAUTHORIZED)
     public ResponseEntity<ResponseDTO> handle(HttpServletRequest request, ExpiredJwtException e) {
 
-        LoggerProvider.APP.info("ExpiredJwtException");
         buildInfoLog(request, String.valueOf(HttpStatus.UNAUTHORIZED.value()), e.getMessage(), null);
         return ResponseEntity.status(HttpStatus.UNAUTHORIZED).
                 body(createErrorBody(request, String.valueOf(HttpStatus.UNAUTHORIZED.value()), e.getMessage()));
+    }
+
+    @ExceptionHandler(JDCRequestException.class)
+    @ResponseStatus(HttpStatus.BAD_REQUEST)
+    public ResponseEntity<ResponseDTO> handle(HttpServletRequest request, JDCRequestException e) {
+
+        buildInfoLog(request, e.getCode(), e.getMessage(), null);
+        return ResponseEntity.status(HttpStatus.BAD_REQUEST).
+                body(createErrorBody(request, e.getCode(), e.getMessage()));
     }
 
     @ExceptionHandler(Throwable.class)

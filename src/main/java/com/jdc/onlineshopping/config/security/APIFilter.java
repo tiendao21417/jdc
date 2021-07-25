@@ -7,7 +7,10 @@ import com.jdc.onlineshopping.domain.User;
 import com.jdc.onlineshopping.service.UserService;
 import com.jdc.onlineshopping.utils.Throws;
 import io.jsonwebtoken.Claims;
+import io.jsonwebtoken.ExpiredJwtException;
+import io.jsonwebtoken.JwtException;
 import io.jsonwebtoken.Jwts;
+import io.jsonwebtoken.security.SignatureException;
 import org.springframework.context.MessageSource;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
@@ -82,14 +85,19 @@ public class APIFilter extends JDCFilter {
 
     private boolean handleOpsFilter(HttpServletRequest httpServletRequest, ServletResponse response) {
 
-        handleFilterInternal(httpServletRequest, response, opsSecret);
+        try {
+            handleFilterInternal(httpServletRequest, response, opsSecret);
+        } catch (JwtException e) {
+            Throws.jdcar(CErrors.TOKEN_IS_NOT_VALID, messageSource.getMessage(CErrors.TOKEN_IS_NOT_VALID,
+                    new Object[]{"body"}, null));
+        }
+
         return false;
     }
 
     private void handleFilterInternal(HttpServletRequest httpServletRequest, ServletResponse response, String secret) {
         String jwt = getJwt(httpServletRequest);
         if (jwt == null || "".equals(jwt)) {
-            LoggerProvider.APP.info("JWT IS NULl");
             Throws.jdca(CErrors.TOKEN_IS_NOT_VALID, messageSource.getMessage(CErrors.TOKEN_IS_NOT_VALID,
                     new Object[]{"body"}, null));
         }
@@ -115,7 +123,12 @@ public class APIFilter extends JDCFilter {
 
     private boolean handleApiFilter(HttpServletRequest httpServletRequest, ServletResponse response) {
 
-        handleFilterInternal(httpServletRequest, response, apiSecret);
+        try {
+            handleFilterInternal(httpServletRequest, response, apiSecret);
+        } catch (JwtException e) {
+            Throws.jdcar(CErrors.TOKEN_IS_NOT_VALID, messageSource.getMessage(CErrors.TOKEN_IS_NOT_VALID,
+                    new Object[]{"body"}, null));
+        }
         return false;
     }
 

@@ -4,7 +4,6 @@ import com.jdc.onlineshopping.constant.CErrors;
 import com.jdc.onlineshopping.domain.Category;
 import com.jdc.onlineshopping.kafka.KafkaTransferKeys;
 import com.jdc.onlineshopping.mapper.CategoryMapper;
-import com.jdc.onlineshopping.app.ops.service.OpsKafkaService;
 import com.jdc.onlineshopping.repository.CategoryRepository;
 import com.jdc.onlineshopping.utils.ResponseUtils;
 import com.jdc.onlineshopping.utils.Throws;
@@ -35,7 +34,7 @@ public class CategoryServiceImpl implements CategoryService {
     private CategoryMapper categoryMapper;
 
     @Autowired
-    private OpsKafkaService kafkaService;
+    private KafkaService kafkaService;
 
     @Autowired
     private MessageSource messageSource;

@@ -29,6 +29,9 @@ public class Product {
     @Column(name = "price")
     private double price;
 
+    @Column(name = "remain_amount")
+    private int remainAmount;
+
     @ManyToOne
     @JsonIgnoreProperties(value = "brand", allowSetters = true)
     private Brand brand;

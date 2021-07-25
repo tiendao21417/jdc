@@ -25,6 +25,9 @@ public class ProductDTO extends AlgoliaDTO {
     @JsonProperty("price")
     private double price;
 
+    @JsonProperty("remain_amount")
+    private int remainAmount;
+
     @JsonProperty("brand")
     private Brand brand;
 

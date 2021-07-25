@@ -33,4 +33,7 @@ public class CreateProductDTO {
     @NotBlank(message = "price not be empty")
     @JsonProperty("price")
     private Double price;
+
+    @JsonProperty("remain_amount")
+    private int remainAmount;
 }

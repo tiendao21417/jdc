@@ -1,4 +1,4 @@
-package com.jdc.onlineshopping.app.ops.service;
+package com.jdc.onlineshopping.service;
 
 import com.jdc.onlineshopping.aop.logging.LoggerProvider;
 import com.jdc.onlineshopping.kafka.HeaderData;
@@ -15,14 +15,14 @@ import org.springframework.util.concurrent.ListenableFutureCallback;
  * @author tiendao on 22/07/2021
  */
 @Service
-public class OpsKafkaServiceImpl implements OpsKafkaService {
+public class KafkaServiceImpl implements KafkaService {
 
     private final KafkaTemplate<String, String> kafkaTemplate;
 
     @Value("${kafka.topics.transfer}")
     private String topic;
 
-    public OpsKafkaServiceImpl(KafkaTemplate<String, String> kafkaTemplate) {
+    public KafkaServiceImpl(KafkaTemplate<String, String> kafkaTemplate) {
         this.kafkaTemplate = kafkaTemplate;
     }
 

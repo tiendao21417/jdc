@@ -30,8 +30,14 @@ public class OrderSnapshot {
     @Column(name = "product_name")
     private String productName;
 
-    @Column(name = "price")
-    private double price;
+    @Column(name = "url")
+    private String url;
+
+    @Column(name = "unit_price")
+    private double unitPrice;
+
+    @Column(name = "amount")
+    private int amount;
 
     @Column(name = "category_code")
     private String categoryCode;
@@ -42,12 +48,8 @@ public class OrderSnapshot {
     @Column(name = "colour")
     private String colour;
 
-    @Column(name = "payment_method")
-    @Enumerated(EnumType.STRING)
-    private EPaymentType paymentMethod;
-
-    @Column(name = "status")
-    @Enumerated(EnumType.STRING)
-    private EStatus status;
+    @ManyToOne
+    @JoinColumn(name = "order_id", nullable = false)
+    private Order order;
 
 }

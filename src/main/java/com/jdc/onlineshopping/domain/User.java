@@ -10,7 +10,7 @@ import javax.persistence.*;
  * @author tiendao on 21/07/2021
  */
 @Entity
-@Table(name = "m_product")
+@Table(name = "m_user")
 @Getter
 @Setter
 public class User {

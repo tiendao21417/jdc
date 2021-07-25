@@ -59,7 +59,7 @@ public class AlgoliaServiceImpl implements AlgoliaService {
                 Arrays.asList("category.", "name")
         ));
 
-        // clearAllDataOnAlgolia();
+        clearAllDataOnAlgolia();
         isInit = true;
     }
 
