@@ -1,15 +1,10 @@
 package com.jdc.onlineshopping;
 
-import com.jdc.onlineshopping.aop.logging.LoggerProvider;
-import org.junit.jupiter.api.Test;
-import org.springframework.boot.test.context.SpringBootTest;
+import org.junit.runner.RunWith;
+import org.springframework.test.context.junit4.SpringRunner;
 
-@SpringBootTest
+@RunWith(SpringRunner.class)
 class OnlineShoppingApplicationTests {
 
-	@Test
-	void contextLoads() {
-		LoggerProvider.APP.info("DONE");
-	}
 
 }

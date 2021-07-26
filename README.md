@@ -13,6 +13,30 @@ limited set of functionalities:
 3. No online payment is supported yet. The customer is required to pay by cash when the product
    got delivered.
 
+Expected Outputs
+1. Implementation for the following operations:
+   • Get a list of products by filtering multiple criteria including category, price, brand,
+   colour.
+   • Add a product to shopping cart
+2. Entity-relationship diagram for the database and solution diagrams for the components,
+   infrastructure design if any
+3. An acceptable amount of unit tests should be covered
+4. Readme file includes:
+   • A brief explanation for the software development principles, patterns & practices being
+   applied
+   • A brief explanation for the code folder structure and the key Java libraries and
+   frameworks being used
+   • All the required steps in order to get the application run on a local computer
+   • Full CURL commands to verify the APIs (include full request endpoint, HTTP Headers and
+   request payload if any)
+
+5. For those who targets a position above Lead level, it's important to have your solution design
+   covers not only the Java backend web services but also all other components of the application
+   as well including the infrastructure
+   
+### SOLUTION
+Refer System Architect Design: https://github.com/tiendao21417/jdc/blob/main/documentation/SAD.dpf
+
 ### Setup Environment
 
 1. Install Docker
@@ -117,6 +141,8 @@ Now our project have structure as below.
 mvn dependency:resolve
 ```
 - Run All test
+
+   - Cause time is limit. So now I'm not yet finish my test cases.
 ```
 mvn test
 ```
@@ -558,3 +584,56 @@ Example Response
 
 6. Now customer can search product by filter.
 
+```
+curl --location --request GET 'http://localhost:8080/api/v1/products?categories=1,3&brands=3,9&colours=Gold&price_min=1400&price_max=2000&name=Green' \
+--header 'Authorization: Bearer eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJ0aWVuLmRhbzIxNDE4QGdtYWlsLmNvbSIsImlhdCI6MTYyNzI4NDQyNCwiZXhwIjoxNjI3MzAyNDI0fQ.tIsjxJvHemEgUlW-MAFD82DAxL7cVMjR_ntiafEp7pUASNiQGgVflbgrcmS9vkiLBt8CgPn3dW_qwYaUyu7RLg'
+```
+
+7. Add product to cart
+```
+curl --location --request POST 'http://localhost:8080/api/v1/cart' \
+--header 'Authorization: Bearer eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJ0aWVuLmRhbzIxNDE4QGdtYWlsLmNvbSIsImlhdCI6MTYyNzIzMTc2MCwiZXhwIjoxNjI3MjQ5NzYwfQ.T01e9SeP7RbUrtcgqO-L3jkAr25Fs1EnejUFim-fpe-YP2JAnu2FSsR5vGD2a3eReV5NydmUuXs3e1A-MTTu8A' \
+--header 'Content-Type: application/json' \
+--data-raw '{
+    "productId": 1,
+    "amount": 7
+}'
+```
+
+8. Remove product from cart
+```
+curl --location --request POST 'http://localhost:8080/api/v1/cart' \
+--header 'Authorization: Bearer eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJ0aWVuLmRhbzIxNDE4QGdtYWlsLmNvbSIsImlhdCI6MTYyNzIzMTc2MCwiZXhwIjoxNjI3MjQ5NzYwfQ.T01e9SeP7RbUrtcgqO-L3jkAr25Fs1EnejUFim-fpe-YP2JAnu2FSsR5vGD2a3eReV5NydmUuXs3e1A-MTTu8A' \
+--header 'Content-Type: application/json' \
+--data-raw '{
+    "productId": 1,
+    "amount": -2
+}'
+```
+
+9. View cart detail
+```
+curl --location --request GET 'http://localhost:8080/api/v1/cart' \
+--header 'Authorization: Bearer eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJ0aWVuLmRhbzIxNDE4QGdtYWlsLmNvbSIsImlhdCI6MTYyNzIzMTc2MCwiZXhwIjoxNjI3MjQ5NzYwfQ.T01e9SeP7RbUrtcgqO-L3jkAr25Fs1EnejUFim-fpe-YP2JAnu2FSsR5vGD2a3eReV5NydmUuXs3e1A-MTTu8A'
+```
+
+10. Create Order
+```
+curl --location --request POST 'http://localhost:8080/api/v1/orders' \
+--header 'Authorization: Bearer eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJ0aWVuLmRhbzIxNDE4QGdtYWlsLmNvbSIsImlhdCI6MTYyNzIzMTc2MCwiZXhwIjoxNjI3MjQ5NzYwfQ.T01e9SeP7RbUrtcgqO-L3jkAr25Fs1EnejUFim-fpe-YP2JAnu2FSsR5vGD2a3eReV5NydmUuXs3e1A-MTTu8A' \
+--header 'Content-Type: application/json' \
+--data-raw '{
+    "customer_name": "DAO VAN TIEN",
+    "customer_phone": "0907958077",
+    "customer_address": "Phuoc Long B, District 9, HCM"
+}'
+```
+
+11. View Order
+```
+curl --location --request GET 'http://localhost:8080/api/v1/orders/1' \
+--header 'Authorization: Bearer eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJ0aWVuLmRhbzIxNDE4QGdtYWlsLmNvbSIsImlhdCI6MTYyNzIzMTc2MCwiZXhwIjoxNjI3MjQ5NzYwfQ.T01e9SeP7RbUrtcgqO-L3jkAr25Fs1EnejUFim-fpe-YP2JAnu2FSsR5vGD2a3eReV5NydmUuXs3e1A-MTTu8A'
+```
+
+
+####Thanks for reading !!!

@@ -26,7 +26,7 @@ public class CartController {
                                            ) {
 
         ResponseDTO responseDTO = cartService.detail(user, requestId);
-        return ResponseEntity.ok().body(ResponseUtils.responseOK(responseDTO));
+        return ResponseEntity.ok().body(responseDTO);
     }
 
     @PostMapping("")
@@ -35,6 +35,6 @@ public class CartController {
                                                         @RequestAttribute(name = CRequestAttribute.REQUEST_ID) String requestId) {
 
         ResponseDTO responseDTO = cartService.addRemoveToCart(user, dto, requestId);
-        return ResponseEntity.ok().body(ResponseUtils.responseOK(responseDTO));
+        return ResponseEntity.ok().body(responseDTO);
     }
 }
