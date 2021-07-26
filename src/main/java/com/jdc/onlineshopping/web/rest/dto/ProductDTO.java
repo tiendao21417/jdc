@@ -1,8 +1,6 @@
 package com.jdc.onlineshopping.web.rest.dto;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
-import com.jdc.onlineshopping.domain.Brand;
-import com.jdc.onlineshopping.domain.Category;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -17,7 +15,7 @@ public class ProductDTO extends AlgoliaDTO {
     private long id;
 
     @JsonProperty("category")
-    private Category category;
+    private CategoryDTO category;
 
     @JsonProperty("name")
     private String name;
@@ -29,11 +27,34 @@ public class ProductDTO extends AlgoliaDTO {
     private int remainAmount;
 
     @JsonProperty("brand")
-    private Brand brand;
+    private BrandDTO brand;
 
     @JsonProperty("colour")
     private String colour;
 
     @JsonProperty("url")
     private String url;
+
+
+    public static ProductDTO valueOf(ProductAlgoliaDTO productAlgoliaDTO) {
+
+        ProductDTO dto = new ProductDTO();
+        dto.setObjectID(productAlgoliaDTO.getObjectID());
+        dto.setId(productAlgoliaDTO.getId());
+        dto.setCategory(new CategoryDTO());
+        dto.getCategory().setId(productAlgoliaDTO.getCategoryId());
+        dto.getCategory().setCode(productAlgoliaDTO.getCategoryCode());
+        dto.getCategory().setName(productAlgoliaDTO.getName());
+        dto.setBrand(new BrandDTO());
+        dto.getBrand().setId(productAlgoliaDTO.getBrandId());
+        dto.getBrand().setCode(productAlgoliaDTO.getBrandCode());
+        dto.getBrand().setName(productAlgoliaDTO.getName());
+        dto.setName(productAlgoliaDTO.getName());
+        dto.setPrice(productAlgoliaDTO.getPrice());
+        dto.setRemainAmount(productAlgoliaDTO.getRemainAmount());
+        dto.setColour(productAlgoliaDTO.getColour());
+        dto.setUrl(productAlgoliaDTO.getUrl());
+        return dto;
+
+    }
 }

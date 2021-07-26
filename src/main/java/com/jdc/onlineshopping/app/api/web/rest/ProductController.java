@@ -53,8 +53,8 @@ public class ProductController {
         findProductDTO.setPriceMax(priceMax);
         findProductDTO.setLimit(limit);
         findProductDTO.setPage(page);
-        ResponseDTO result = productService.find(findProductDTO, user, requestId);
-        return ResponseEntity.ok().body(ResponseUtils.responseOK(result));
+        ResponseDTO responseDTO = productService.find(findProductDTO, user, requestId);
+        return ResponseEntity.ok().body(responseDTO);
     }
 
     private List<Long> getAsLongList(String text) {

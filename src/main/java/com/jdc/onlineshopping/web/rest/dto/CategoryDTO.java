@@ -19,4 +19,5 @@ public class CategoryDTO extends AlgoliaDTO {
 
     @JsonProperty("name")
     private String name;
+
 }

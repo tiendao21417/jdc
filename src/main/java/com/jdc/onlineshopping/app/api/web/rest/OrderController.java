@@ -27,7 +27,7 @@ public class OrderController {
                                            @RequestAttribute(name = CRequestAttribute.REQUEST_ID) String requestId) {
 
         ResponseDTO responseDTO = orderService.getOrder(id, user, requestId);
-        return ResponseEntity.ok().body(ResponseUtils.responseOK(responseDTO));
+        return ResponseEntity.ok().body(responseDTO);
     }
 
     @PostMapping("")
@@ -36,6 +36,6 @@ public class OrderController {
                                               @RequestAttribute(name = CRequestAttribute.REQUEST_ID) String requestId) {
 
         ResponseDTO responseDTO = orderService.create(user, dto, requestId);
-        return ResponseEntity.ok().body(ResponseUtils.responseOK(responseDTO));
+        return ResponseEntity.ok().body(responseDTO);
     }
 }

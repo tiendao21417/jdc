@@ -4,6 +4,7 @@ import com.algolia.search.models.indexing.SearchResult;
 import com.jdc.onlineshopping.app.api.web.rest.dto.FindProductDTO;
 import com.jdc.onlineshopping.web.rest.dto.BrandDTO;
 import com.jdc.onlineshopping.web.rest.dto.CategoryDTO;
+import com.jdc.onlineshopping.web.rest.dto.ProductAlgoliaDTO;
 import com.jdc.onlineshopping.web.rest.dto.ProductDTO;
 
 public interface AlgoliaService {
@@ -20,5 +21,5 @@ public interface AlgoliaService {
 
     void pushProduct(ProductDTO[] brandDTOs);
 
-    SearchResult<ProductDTO> find(FindProductDTO findProductDTO, String requestId);
+    SearchResult<ProductAlgoliaDTO> find(FindProductDTO findProductDTO, String requestId);
 }
