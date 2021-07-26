@@ -7,12 +7,9 @@ import lombok.Setter;
 /**
  * @author tiendao on 22/07/2021
  */
-//@Getter
-//@Setter
-public class BrandDTO /*extends AlgoliaDTO */{
-
-    @JsonProperty("objectID")
-    private String objectID;
+@Getter
+@Setter
+public class BrandDTO extends AlgoliaDTO {
 
     @JsonProperty("id")
     private long id;
@@ -23,35 +20,4 @@ public class BrandDTO /*extends AlgoliaDTO */{
     @JsonProperty("name")
     private String name;
 
-    public String getObjectID() {
-        return objectID;
-    }
-
-    public void setObjectID(String objectID) {
-        this.objectID = objectID;
-    }
-
-    public long getId() {
-        return id;
-    }
-
-    public void setId(long id) {
-        this.id = id;
-    }
-
-    public String getCode() {
-        return code;
-    }
-
-    public void setCode(String code) {
-        this.code = code;
-    }
-
-    public String getName() {
-        return name;
-    }
-
-    public void setName(String name) {
-        this.name = name;
-    }
 }
